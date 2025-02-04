@@ -37,8 +37,11 @@ const handler = NextAuth({
       session.accessToken = token.accessToken;
       return session;
     },
-    async redirect({ baseUrl }) {
+    async redirect({ url, baseUrl }) {
+      if (url.includes('error=Callback') || url == '/') {
         return baseUrl;
+      }
+      return url;
     },
   },
 });
